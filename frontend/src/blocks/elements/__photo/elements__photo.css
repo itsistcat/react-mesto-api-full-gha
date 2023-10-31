@@ -1,0 +1,11 @@
+.elements__photo{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-height: 282px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    vertical-align: bottom;
+    cursor: pointer;
+}

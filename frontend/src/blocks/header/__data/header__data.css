@@ -1,0 +1,14 @@
+.header__data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 24px;
+  font-size: 18px;
+  line-height: calc(22 / 18 * 100%);
+}
+
+@media screen and (max-width: 696px) {
+  .header__data {
+    margin-right: 27px;
+  }
+}

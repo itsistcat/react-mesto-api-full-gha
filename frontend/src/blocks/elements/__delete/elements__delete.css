@@ -1,0 +1,16 @@
+.elements__delete {
+    background-image: url(../../../images/dltBtn.svg);
+    width: 18px;
+    height: 19.3px;
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: opacity .6s linear;
+}
+
+.elements__delete:hover {
+    opacity: .6;
+  }

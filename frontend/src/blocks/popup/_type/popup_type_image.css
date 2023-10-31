@@ -1,0 +1,12 @@
+.popup_type_image{
+    background-color: rgba(0, 0, 0, .9);
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 767px) {
+    .popup_type_image {
+        background-color: rgba(0, 0, 0, .9);
+    }
+      
+  }
