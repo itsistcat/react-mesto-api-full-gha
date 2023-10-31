@@ -1,4 +1,4 @@
-const url = 'http://localhost:3000';
+const url = 'https://api.prakt.nomoredomainsrocks.ru';
 
 function checkResponse(res) {
   if (res.ok) {
