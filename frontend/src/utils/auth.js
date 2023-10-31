@@ -1,4 +1,4 @@
-const url = 'https://auth.nomoreparties.co';
+const url = 'http://localhost:3000';
 
 function checkResponse(res) {
   if (res.ok) {
@@ -31,7 +31,7 @@ export function authorizeUser(email, password) {
     .then(res => checkResponse(res))
       .then((data) => {
         if (data.token) {
-          const token = data.token;
+          const { token } = data;
           localStorage.setItem('jwt', token);
   
           return token;

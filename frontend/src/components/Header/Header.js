@@ -3,34 +3,45 @@ import { Outlet, useMatch, Link, useNavigate } from 'react-router-dom';
 import useWindowDimensions from '../hooks/useWindowDimensions';
 import logo from '../../images/logo.svg';
 
-export default function Header({ userData, setIsLoggedIn, isActive, onActive, toggleBurgerMenu }) {
+export default function Header({ userData, isLoggedIn, setIsLoggedIn, setUserData, setCurrentUser, isActive, onActive, toggleBurgerMenu }) {
   // TODO: Исправить баг, когда исчезают элементы при наличии/отсутствии косой черты в конце url (regExp?)
   const windowWidth = useWindowDimensions();
 
   const href = useMatch({ path: `${window.location.pathname}`, end: false });
-  const isRootHref = href.pathname.endsWith('/react-mesto-auth');
-  const isLoginHref = href.pathname.endsWith('/sign-in');
+  const isLoginHref = href.pathname.endsWith('/signin');
 
   const burgerElement = <span className="header__burger-line" />;
   
   const navigate = useNavigate();
 
   function isDisplayMobileAndRootHref() {
-    return windowWidth <= 696 && isRootHref;
+    return windowWidth <= 696 && isLoggedIn;
   };
 
   function signUserOut() {
     toggleBurgerMenu();
     localStorage.removeItem('jwt');
-    navigate('./sign-in', { replace: true });
+    navigate('./signin', { replace: true });
     setIsLoggedIn(false);
+    setUserData({
+      _id: '',
+      email: ''
+    });
+
+    setCurrentUser({
+      _id: '',
+      email: '',
+      name: '',
+      about: '',
+      avatar: ''
+    });
   };
 
   function renderHeaderMenu() {
     return (
       <div className={`header__data ${isDisplayMobileAndRootHref() && 'header__data_display_mobile'}`}>
         {
-          isRootHref
+          isLoggedIn
             ? <>
               <p className='header__email'>{userData.email}</p>
               <button
@@ -44,7 +55,7 @@ export default function Header({ userData, setIsLoggedIn, isActive, onActive, to
             </>
             : <Link
               className='header__btn'
-              to={isLoginHref ? './sign-up' : './sign-in'}
+              to={isLoginHref ? './signup' : './signin'}
             >
               {isLoginHref ? 'Регистрация' : 'Войти'}
             </Link>
@@ -59,7 +70,7 @@ export default function Header({ userData, setIsLoggedIn, isActive, onActive, to
       <header className="header">
         <img src={logo} alt="Логотип" className="logo" />
         {
-          isRootHref &&
+          isLoggedIn &&
           <button
             className={`header__burger ${isActive && 'active'}`}
             type="button"

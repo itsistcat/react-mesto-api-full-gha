@@ -1,7 +1,7 @@
 {
   "name": "react-mesto-auth",
   "version": "0.1.0",
-  "homepage": "https://itsistcat.github.io/react-mesto-auth",
+  "homepage": "https://itsistcat.github.io/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -15,7 +15,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "npm run build && scp -r ./build/* itsistcat@158.160.121.32:/home/itsistcat/frontend",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

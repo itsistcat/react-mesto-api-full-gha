@@ -1,15 +1,6 @@
-const apiOptions = {
-  url: "https://mesto.nomoreparties.co/v1/cohort-66/",
-  headers: {
-    authorization: "d647408b-bad2-4351-8f58-989ba8d12956",
-    "Content-Type": "application/json"
-  }
-}
-
 class Api {
-  constructor({url, headers}) {
-    this._url = url;
-    this._headers = headers;
+  constructor() {
+    this._url = 'http://localhost:3000';
   }
 
   _checkResponse(res) {
@@ -26,14 +17,21 @@ class Api {
 
   getUserInfo() {
     return this._request(`${this._url}/users/me`, {
-      headers: this._headers
-    }) 
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-type': 'application/json'
+      }
+    }
+    );
   }
 
   editUserInfo(name, about) {
     return this._request(`${this._url}users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-type': 'application/json'
+      },
       body: JSON.stringify({ name, about })
     })
   }
@@ -42,14 +40,20 @@ class Api {
   editUserAvatar(avatar) {
     return this._request(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-type': 'application/json'
+      },
       body: JSON.stringify({ avatar })
     })
   }
 
   getCards() {
     return this._request(`${this._url}cards`, {
-      headers: this._headers
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-type': 'application/json'
+      },
     })
   }
 
@@ -57,7 +61,10 @@ class Api {
   addNewCards(name, link) {
     return this._request(`${this._url}/cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-type': 'application/json'
+      },
       body: JSON.stringify({ name, link })
     })
 
@@ -66,7 +73,10 @@ class Api {
   deleteCards(id) {
     return this._request(`${this._url}/cards/${id}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-type': 'application/json'
+      },
     })
   }
 
@@ -74,14 +84,20 @@ class Api {
     if (!isLiked) {
       return this._request(`${this._url}/cards/${id}/likes`, {
         method: 'PUT',
-        headers: this._headers
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+          'Content-type': 'application/json'
+        },
       })
     } else {
       return this._request(`${this._url}/cards/${id}/likes`, {
         method: 'DELETE',
-        headers: this._headers
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+          'Content-type': 'application/json'
+        },
       })
     }
   }
 }
-export const api = new Api(apiOptions);
+export const api = new Api();

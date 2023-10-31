@@ -27,7 +27,7 @@ export default function Register({
   useEffect(() => {
     if (isInfoTooltipOpened && isData) {
       setTimeout(() => {
-        navigate('../sign-in', { replace: false });
+        navigate('../signin', { replace: false });
         onClose(false);
       }, 1200);
     };
@@ -87,7 +87,7 @@ export default function Register({
           onChange={handleChange}
         />
         <p className="welcome-window__paragraph">Уже зарегистрированы?&nbsp;
-          <Link className='welcome-window__link' to='../sign-in'>Войти</Link>
+          <Link className='welcome-window__link' to='../signin'>Войти</Link>
         </p>
 
       </WelcomeWindowForm>

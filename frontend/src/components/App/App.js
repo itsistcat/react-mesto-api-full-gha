@@ -35,7 +35,13 @@ function App() {
   const [isProcessLoading, setIsProcessLoading] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
 
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({
+    _id: '',
+    email: '',
+    name: '',
+    about: '',
+    avatar: ''
+  });
   const [cards, setCards] = useState([]);
   const [isInfoTooltipOpened, setIsInfoTooltipOpened] = useState(false);
   const [isAppLoading, setIsAppLoading] = useState(false);
@@ -72,14 +78,14 @@ function App() {
       setIsAppLoading(true);
       getContent(jwt)
         .then((res) => {
-          const data = res.data;
+          const { _id, email } = res;
           const userData = {
-            _id: data._id,
-            email: data.email
+            _id,
+            email
           };
           setUserData(userData);
           handleLogin();
-          navigate('/react-mesto-auth', { replace: true });
+          navigate('/', { replace: true });
         })
         .catch((err) => {
           console.log(`Ошибка в процессе проверки токена пользователя и получения личных данных: ${err}`);
@@ -143,7 +149,7 @@ function App() {
   };
 
   function closePopupsOnOutsideClick(evt) {
-    const target = evt.target;
+    const { target } = evt;
     const checkSelector = selector => target.classList.contains(selector);
 
     if (checkSelector('popup__opened') || checkSelector('popup__close')) {
@@ -212,7 +218,7 @@ function App() {
     setIsProcessLoading(true);
     api.addNewCards(data.name, data.link)
       .then((card) => {
-        setCards([card, ...cards]);
+        setCards([...cards, card]);
         closeAllPopups();
       })
       .catch((err) => {
@@ -234,11 +240,14 @@ function App() {
 
       <div className={`page ${isActiveBurgerMenu && 'active'}`}>
         <Routes>
-          <Route path='react-mesto-auth/' element={
+          <Route path='/' element={
             <Header
               isActive={isActiveBurgerMenu}
               onActive={toggleBurgerMenu}
               userData={userData}
+              isLoggedIn={isLoggedIn}
+              setUserData={setUserData}
+              setCurrentUser={setCurrentUser}
               setIsLoggedIn={setIsLoggedIn}
               toggleBurgerMenu={toggleBurgerMenu}
             />}>
@@ -306,14 +315,14 @@ function App() {
                 </>
               }
             />
-            <Route path='sign-in' element={<Login
+            <Route path='signin' element={<Login
               handleLogin={handleLogin}
               isProcessLoading={isProcessLoading}
               setIsProcessLoading={setIsProcessLoading}
             />
             }
             />
-            <Route path='sign-up' element={
+            <Route path='signup' element={
               <Register
                 popupPackProps={popupPackProps}
 
