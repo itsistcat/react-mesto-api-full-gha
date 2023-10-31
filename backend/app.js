@@ -49,4 +49,4 @@ app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
-app.listen(PORT);
+app.listen(PORT, () => console.log(PORT));
