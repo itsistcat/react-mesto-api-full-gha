@@ -160,7 +160,7 @@ function setUserAvatar(req, res, next) {
       },
     )
     .then((user) => {
-      if (user) return res.send({ user });
+      if (user) return res.send(user);
 
       throw new NotFoundError('Пользователь с таким id не найден');
     })
