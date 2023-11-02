@@ -26,7 +26,7 @@ class Api {
   }
 
   editUserInfo(name, about) {
-    return this._request(`${this._url}users/me`, {
+    return this._request(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
@@ -49,7 +49,7 @@ class Api {
   }
 
   getCards() {
-    return this._request(`${this._url}cards`, {
+    return this._request(`${this._url}/cards`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
         'Content-type': 'application/json'
