@@ -33,8 +33,8 @@ mongoose.connect(URL);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(limiter);
 app.use(requestLogger);
+app.use(limiter);
 
 app.use('/', routeSignup);
 app.use('/', routeSignin);
