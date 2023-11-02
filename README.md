@@ -20,7 +20,6 @@
 ## Ссылки на проект🔗
 
 IP 158.160.121.32
-
 Frontend https://prakt.nomoredomainsrocks.ru
 Backend https://api.prakt.nomoredomainsrocks.ru
 
